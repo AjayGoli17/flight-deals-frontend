@@ -1,0 +1,1 @@
+SHEETY_URL = "https://api.sheety.co/1b10d87e4d8d97401a38c4a463481a52/flightDeals/sheet1"

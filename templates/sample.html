@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Deals Club - Get Flight Deals Instantly!</title>
+    <meta name="description" content="Join Flight Deals Club to get exclusive flight deals to your favorite destinations worldwide.">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Smooth scrolling for all browsers */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 8px 4px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 70px;
+        }
+
+        /* Ensure body doesn't scroll when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="1" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><g fill="url(%23a)"><circle cx="200" cy="200" r="150"/><circle cx="800" cy="300" r="100"/><circle cx="400" cy="600" r="120"/><circle cx="900" cy="700" r="80"/></g></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+            padding: 40px 0;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Registration Form */
+        .registration-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Dropdown Styles */
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .dropdown-container.active .dropdown-icon {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-container.active .dropdown-list {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-item.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .dropdown-item .flag {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-item .country {
+            font-size: 0.95rem;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 48px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 60px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+        }
+
+        .success-content i {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .success-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .success-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+
+        /* Large Desktop (1200px and up) */
+        @media (min-width: 1200px) {
+            .hero-container {
+                max-width: 1400px;
+            }
+
+            .hero-text h1 {
+                font-size: 4rem;
+            }
+
+            .hero-text p {
+                font-size: 1.3rem;
+            }
+
+            .form-container {
+                max-width: 550px;
+                padding: 50px;
+            }
+        }
+
+        /* Laptop/Desktop (992px to 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .hero-text h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-content {
+                gap: 50px;
+            }
+
+            .form-container {
+                max-width: 480px;
+                padding: 40px;
+            }
+        }
+
+        /* Tablet (768px to 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+                gap: 40px;
+            }
+
+            .form-container {
+                margin: 0 auto;
+                max-width: 500px;
+                padding: 35px;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .step:nth-child(3) {
+                grid-column: 1 / -1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Mobile Large (481px to 767px) */
+        @media (max-width: 767px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                gap: 15px;
+                z-index: 1001;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu .nav-item {
+                margin: 0;
+            }
+
+            .nav-menu .nav-link {
+                padding: 12px 20px;
+                display: block;
+                width: 100%;
+                border-radius: 8px;
+                margin: 0 20px;
+                text-align: center;
+            }
+
+            .nav-menu .nav-link:hover {
+                background: rgba(102, 126, 234, 0.1);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+                padding: 20px 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+                line-height: 1.1;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+
+            .hero-stats {
+                justify-content: center;
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+
+            .form-container {
+                padding: 30px 25px;
+                margin: 0 20px;
+                border-radius: 15px;
+            }
+
+            .how-it-works {
+                padding: 60px 0;
+            }
+
+            .how-it-works h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .dropdown-list {
+                max-height: 150px;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Mobile Small (320px to 480px) */
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .form-container {
+                padding: 25px 20px;
+                margin: 0 15px;
+            }
+
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-group input {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+
+            .submit-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .nav-logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-logo i {
+                font-size: 1.5rem;
+            }
+
+            .step {
+                padding: 30px 15px;
+            }
+
+            .step-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .step h3 {
+                font-size: 1.3rem;
+            }
+
+            .dropdown-list {
+                max-height: 120px;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Extra Small Mobile (below 320px) */
+        @media (max-width: 319px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-container {
+                margin: 0 10px;
+                padding: 20px 15px;
+            }
+
+            .nav-container {
+                padding: 0 10px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .step {
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-plane"></i>
+                <span>Flight Deals Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#how-it-works" class="nav-link">How it Works</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#signup" class="nav-link">Sign Up</a>
+                </li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Main Content -->
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Discover Amazing Flight Deals</h1>
+                    <p>Join thousands of travelers who save money on flights to their dream destinations. Get exclusive deals delivered straight to your inbox!</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Happy Travelers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Destinations</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">$500+</span>
+                            <span class="stat-label">Average Savings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Registration Form (valid and no extra tags added) -->
+
+
+                <form class="registration-form" id="registrationForm" method="POST" action="/signup">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destination">Enter your favorite destination</label>
+                        <input type="text" id="destination" name="destination" placeholder="Type your destination" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Submit</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3>Sign Up</h3>
+                        <p>Register with your email and preferred destination to start receiving personalized flight deals.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>We Search</h3>
+                        <p>Our advanced algorithms continuously monitor flight prices and find the best deals for your destination.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3>Get Notified</h3>
+                        <p>Receive instant notifications when amazing flight deals become available for your chosen destination.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-plane"></i>
+                    <span>Flight Deals Club</span>
+                </div>
+                <p>; 2025 Flight Deals Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Registration Successful!</h3>
+            <p>Thank you for joining Flight Deals Club. We'll send you amazing flight deals soon!</p>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const destinationInput = document.getElementById('destination');
+        const destinationList = document.getElementById('destinationList');
+        const dropdownContainer = document.querySelector('.dropdown-container');
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        const registrationForm = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Mobile Navigation Toggle
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!document.querySelector('.navbar').contains(e.target)) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Dropdown functionality
+        destinationInput.addEventListener('click', () => {
+            dropdownContainer.classList.toggle('active');
+        });
+
+        destinationInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            dropdownItems.forEach(item => {
+                const countryName = item.querySelector('.country').textContent.toLowerCase();
+                const countryValue = item.getAttribute('data-value').toLowerCase();
+
+                if (countryName.includes(searchTerm) || countryValue.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (!dropdownContainer.classList.contains('active')) {
+                dropdownContainer.classList.add('active');
+            }
+        });
+
+        // Handle dropdown item selection
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const countryValue = item.getAttribute('data-value');
+                const countryName = item.querySelector('.country').textContent;
+
+                destinationInput.value = countryName;
+                destinationInput.setAttribute('data-value', countryValue);
+
+                // Remove previous selection
+                dropdownItems.forEach(dropdownItem => {
+                    dropdownItem.classList.remove('selected');
+                });
+
+                // Add selection to clicked item
+                item.classList.add('selected');
+
+                // Close dropdown
+                dropdownContainer.classList.remove('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownContainer.contains(e.target)) {
+                dropdownContainer.classList.remove('active');
+            }
+        });
+
+        // Add loading animation to submit button
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalButtonText = submitBtn.innerHTML;
+
+        function showLoading() {
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+        }
+
+        function hideLoading() {
+            submitBtn.innerHTML = originalButtonText;
+            submitBtn.disabled = false;
+        }
+
+        // Enhanced form submission with loading state
+        registrationForm.addEventListener('submit', (e) => {
+
+
+            showLoading();
+
+            // Simulate API call delay
+            setTimeout(() => {
+                hideLoading();
+
+                // Get form data
+                const formData = new FormData(registrationForm);
+                const fullName = formData.get('fullName');
+                const email = formData.get('email');
+                const destination = destinationInput.getAttribute('data-value') || destinationInput.value;
+
+                // Basic validation
+                if (!fullName || !email || !destination) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                // Email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+
+                // Log form data (in real app, this would be sent to server)
+                console.log('Registration data:', {
+                    fullName,
+                    email,
+                    destination,
+                    timestamp: new Date().toISOString()
+                });
+
+                // Show success message
+                showSuccessMessage();
+
+                // Reset form
+                registrationForm.reset();
+                destinationInput.removeAttribute('data-value');
+                dropdownItems.forEach(item => item.classList.remove('selected'));
+
+            }, 1000);
+        });
+
+        // Show success message
+        function showSuccessMessage() {
+            successMessage.classList.add('show');
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        // Close success message when clicking outside
+        successMessage.addEventListener('click', (e) => {
+            if (e.target === successMessage) {
+                successMessage.classList.remove('show');
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Add input validation feedback
+        function addValidationFeedback() {
+            const inputs = document.querySelectorAll('input[required]');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => {
+                    if (input.value.trim() === '') {
+                        input.style.borderColor = '#dc3545';
+                        input.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
+                    } else {
+                        input.style.borderColor = '#28a745';
+                        input.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.1)';
+                    }
+                });
+
+                input.addEventListener('input', () => {
+                    if (input.style.borderColor === 'rgb(220, 53, 69)') {
+                        input.style.borderColor = '#e1e8ed';
+                        input.style.boxShadow = 'none';
+                    }
+                });
+            });
+        }
+
+        // Initialize validation feedback
+        addValidationFeedback();
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.step').forEach(step => {
+            step.style.opacity = '0';
+            step.style.transform = 'translateY(30px)';
+            step.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(step);
+        });
+
+    window.onload = function () {
+        const form = document.getElementById("registrationForm");
+        if (form) {
+            form.addEventListener("submit", function () {
+                console.log("✅ Form submitted!");
+            });
+        } else {
+            console.log("❌ Form not found");
+        }
+    };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Python & Flask
+__pycache__/
+*.pyc
+.env
+*.env
+*.db
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Virtual environment
+.venv/
